@@ -1,23 +1,60 @@
 <template>
-  <div class="app">
-    <h1>{{ msg }}</h1>
-    <!-- form to add a book -->
-    <form action="">
-      <!--文件框, 对应的数据集, 上传数据集-->
-      数据集文件：<input type="file" id="csvFile" @change="handleGetFile($event)"><br>
-      距离阈值：<input type="text" placeholder="请输入距离阈值" v-model="mining_parameters.disThreshold"><br>
-      空间参与度阈值：<input type="text" placeholder="请输入空间参与度阈值" v-model="mining_parameters.spatialPrev"><br>
-      时间参与度阈值：<input type="text" placeholder="请输入时间参与度阈值" v-model="mining_parameters.temporalPrev">
-    </form>
-    <el-button type="primary">Primary</el-button>
-    <button type="submit" @click="submitInfo()">计算频繁项集</button>
-    <p>Positive Set: {{ result1 }}</p>
-    <p>Negative Set: {{ result2 }}</p>
-  </div>
+  <el-container>
+    <el-header>
+      <h1>Spatio-Temporal Data Mining</h1>
+    </el-header>
+    <el-container>
+      <el-aside>
+        <el-menu>
+          <el-menu-item index="1">
+            <!-- <el-icon><icon-menu /></el-icon> -->
+            <span>PNCOP Algorithm</span>
+          </el-menu-item>
+        </el-menu>
+      </el-aside>
+      <el-container>
+        <el-main>
+          <el-form :label-position="labelPosition" class="pncop-form" label-width="160px" style="max-width: 500px">
+            <el-form-item label="数据集文件：">
+              <input type="file" id="csvFile" @change="handleGetFile($event)">
+            </el-form-item>
+            <el-form-item label="距离阈值：">
+              <el-input v-model="mining_parameters.disThreshold" />
+            </el-form-item>
+            <el-form-item label="空间参与度阈值：">
+              <el-input v-model="mining_parameters.spatialPrev" />
+            </el-form-item>
+            <el-form-item label="时间参与度阈值：">
+              <el-input v-model="mining_parameters.temporalPrev" />
+            </el-form-item>
+            <el-form-item>
+              <el-button type="primary" @click="submitInfo()">计算频繁项集</el-button>
+            </el-form-item>
+          </el-form>
+          <el-descriptions title="Pattern Results:" :column="1" border>
+            <el-descriptions-item label="Positive Pattern" label-align="center" label-width="50px" align="center"
+              label-class-name="my-label" class-name="my-content" width="200px">{{ result1 }}</el-descriptions-item>
+            <el-descriptions-item label="Negative Pattern" label-align="center" label-width="50px" align="center">{{
+              result2
+            }}</el-descriptions-item>
+          </el-descriptions>
+        </el-main>
+        <el-footer>
+          <h5>Ecust 2023 @copyright</h5>
+        </el-footer>
+      </el-container>
+    </el-container>
+  </el-container>
 </template>
 
 <script>
 // import { computeFrequentSet } from './api/api.js'
+// import {
+//   Document,
+//   Menu as IconMenu,
+//   Location,
+//   Setting,
+// } from '@element-plus/icons-vue'
 import axiosInstance from './api/index'
 import { ref } from 'vue';
 const axios = axiosInstance
@@ -25,13 +62,12 @@ const axios = axiosInstance
 export default { // 组件暴露的属性
   name: 'App',
   setup() {
-    let msg = ref('Welcome to Your Vue.js App');
     let mining_parameters = ref({
       "disThreshold": "",
       "spatialPrev": "",
       "temporalPrev": "",
-      "csvFile":'',
-      "csvFileName":''
+      "csvFile": '',
+      "csvFileName": ''
     });
     let result1 = ref('');
     let result2 = ref('');
@@ -58,7 +94,7 @@ export default { // 组件暴露的属性
       mining_parameters.value.csvFile = e.target.files[0]
       mining_parameters.value.csvFileName = e.target.files[0].name
     }
-    return { msg, mining_parameters, result1, result2, submitInfo, handleGetFile }
+    return { mining_parameters, result1, result2, submitInfo, handleGetFile }
   },
   // data() {
   //   return {
@@ -103,6 +139,51 @@ export default { // 组件暴露的属性
 }
 </script>
 
-<style>
+<style scoped>
+.my-label {
+  background: var(--el-color-success-light-9);
+}
 
+.my-content {
+  background: var(--el-color-danger-light-9);
+}
+
+.el-container {
+  height: 100%;
+}
+
+.el-header {
+  background-color: #D4D7DE;
+  color: #303133;
+  text-align: left;
+  line-height: 50px;
+  height: 100px;
+}
+
+.el-footer {
+  background-color: #D4D7DE;
+  color: #303133;
+  text-align: right;
+  line-height: 50px;
+}
+
+.el-aside {
+  background-color: #E6E8EB;
+  color: #303133;
+  text-align: center;
+  line-height: 200px;
+  width: 300px;
+}
+
+.el-main {
+  background-color: #FFFFFF;
+  color: #303133;
+  text-align: center;
+  line-height: 160px;
+  height: 710px;
+}
+
+/* .el-menu {
+  background-color: #d3dce6;
+} */
 </style>
