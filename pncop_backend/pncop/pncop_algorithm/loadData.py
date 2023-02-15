@@ -16,10 +16,10 @@ class pacaop_object:
 def load_data():
     # pd.set_option('display.notebook_repr_html', False)
     # 获取所有的表（结构为字典）
-    sheets = pd.read_excel(io='pncop/datasets/模拟数据集.xls', sheet_name=[0, 1, 2, 3, 4])
-
+    # for sys
+    sheets = pd.read_excel(io='/Users/mufiye/data-mining/PNCOP_sys/pncop_backend/pncop/datasets/模拟数据集.xls', sheet_name=[0, 1, 2, 3, 4])
     # 获取其中的一个表
-    sheet_1 = sheets[3]
+    sheet_1 = sheets[4]
     # print(sheet_1.values)
 
     # 获取类别list
@@ -31,12 +31,12 @@ def load_data():
         pacop_object = pacaop_object(sheet_1.values[i, 0], int(sheet_1.values[i, 1]), sheet_1.values[i, 2], sheet_1.values[i, 3])
         object_list.append(pacop_object)
     object_type_list.sort()
-    print(object_type_list)
+    # print(object_type_list)
     return object_type_list, object_list
 
 
 def load_data_with_time():
-    sheets = pd.read_excel(io='pncop/datasets/模拟数据集.xls', sheet_name=[0, 1, 2, 3])
+    sheets = pd.read_excel(io="/Users/mufiye/data-mining/PNCOP_sys/pncop_backend/pncop/datasets/模拟数据集.xls", sheet_name=[0, 1, 2, 3])
     object_type_set = set()
     object_list = []
     for i in range(4):

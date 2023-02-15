@@ -372,4 +372,4 @@ def findPNCOP(R, spatial_prev, temporal_prev):
 
 
 if __name__ == '__main__':
-    findPNCOP()
+    findPNCOP(5, 0.4, 0.4)
