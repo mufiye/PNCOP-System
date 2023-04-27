@@ -4,5 +4,6 @@ from . import views
 
 urlpatterns = [
     path('pncop/', views.compute_pncop_frequent_set),
-    path('pacop/', views.compute_pacop_frequent_set)
+    path('pacop/', views.compute_pacop_frequent_set),
+    path('joinbased/', views.compute_joinbased_frequent_set)
 ]

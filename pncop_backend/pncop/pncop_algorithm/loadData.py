@@ -17,9 +17,9 @@ def load_data():
     # pd.set_option('display.notebook_repr_html', False)
     # 获取所有的表（结构为字典）
     # for sys
-    sheets = pd.read_excel(io='/Users/mufiye/data-mining/PNCOP_sys/pncop_backend/pncop/datasets/模拟数据集.xls', sheet_name=[0, 1, 2, 3, 4])
+    sheets = pd.read_excel(io='/Users/mufiye/data-mining/PNCOP_sys/pncop_backend/pncop/datasets/colocationdata.xls', sheet_name=[0])
     # 获取其中的一个表
-    sheet_1 = sheets[4]
+    sheet_1 = sheets[0]
     # print(sheet_1.values)
 
     # 获取类别list

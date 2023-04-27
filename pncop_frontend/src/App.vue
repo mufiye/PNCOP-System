@@ -10,13 +10,25 @@
             <span>PNCOP Algorithm</span>
           </el-menu-item>
           <el-menu-item index="pacop">
-            <span>PACOP</span>
+            <span>PACOP Algorithm</span>
+          </el-menu-item>
+          <el-menu-item index="pncor">
+            <span>Traditional PNCOR Algorithm</span>
           </el-menu-item>
           <el-menu-item index="fastpncop">
             <span>Fast PNCOP Algorithm</span>
           </el-menu-item>
-          <el-menu-item index="nativepncop">
-            <span>Native PNCOP Algorithm</span>
+          <el-menu-item index="joinbased">
+            <span>Join-based Algorithm</span>
+          </el-menu-item>
+          <el-menu-item index="joinless">
+            <span>Joinless Algorithm</span>
+          </el-menu-item>
+          <el-menu-item index="regional">
+            <span>Regional Algorithm</span>
+          </el-menu-item>
+          <el-menu-item index="weighted">
+            <span>Weighted Algorithm</span>
           </el-menu-item>
         </el-menu>
       </el-aside>
@@ -46,7 +58,7 @@
   color: #303133;
   text-align: left;
   line-height: 50px;
-  height: 100px;
+  height: 10vh;
 }
 
 .el-footer {
@@ -69,7 +81,8 @@
   color: #303133;
   text-align: center;
   line-height: 160px;
-  height: 710px;
+  height: 82vh;
+  /* height: 10px */
 }
 
 /* .el-menu {

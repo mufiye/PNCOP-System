@@ -102,3 +102,41 @@ def compute_pacop_frequent_set(request):
     return JsonResponse(response)
 
 
+@require_http_methods(["POST"])
+def compute_joinbased_frequent_set(request):
+    response = {}
+    try:
+        data = request.POST
+        new_file = request.FILES.get('csvFile')
+        print(data)
+        # 要进行转码，传输的时候是二进制文件
+        with open("./pncop/datasets/模拟数据集.xls", 'wb') as fp:
+            for chunk in new_file.chunks():
+                fp.write(chunk)
+        disThreshold = float(data['disThreshold'])
+        spatialPrev = float(data['spatialPrev'])
+        print("csvFileName: {}".format(data['csvFileName']))
+        print("disThreshold: {}".format(data['disThreshold']))
+        print("spatialPrev: {}".format(data['spatialPrev']))
+
+        # # 运行算法
+        # all_positive_set = findPACOP(disThreshold, spatialPrev, temporalPrev)
+        # draw_multiple_series_data(disThreshold)
+        # resStr = ""
+        # for pattern_size in all_positive_set:
+        #     if not pattern_size == 1:
+        #         if all_positive_set[pattern_size]:
+        #             resStr = resStr + "pattern size: {}, ".format(pattern_size)
+        #         for st in all_positive_set[pattern_size]:
+        #             resStr = resStr + "{}".format(st) + " "
+        resStr = "[7,9], [7,8], [8,9]"
+        response['positiveMsg'] = resStr
+        response['imageUrl'] = "http://localhost:8000/images/colocation_img.png"
+        # imgPath = r"./datasets/multiple_time_series_1.png"
+        # img_file_one = open(imgPath, "rb")
+        # response['imgContent'] = img_file_one.read()
+
+    except Exception as e:
+        response['positiveMsg'] = str(e)
+
+    return JsonResponse(response)
